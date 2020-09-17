@@ -6,7 +6,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import androidx.annotation.Nullable;
 
-import com.example.friendschedule.Contracts.FeedDataContract;
+import com.example.friendschedule.Utils.Table_Utils;
 
 public class DbContextSqLiteHelper extends SQLiteOpenHelper {
 
@@ -20,12 +20,12 @@ public class DbContextSqLiteHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL(FeedDataContract.AmigoEntry.SQL_CREATE_ENTRIES);
+        db.execSQL(Table_Utils.SQL_CREAR_ENTRADAS_AMIGO);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int i, int i1) {
-        db.execSQL(FeedDataContract.AmigoEntry.SQL_DELETE_ENTRIES);
+        db.execSQL(Table_Utils.SQL_BORRAR_ENTRADAS_AMIGO);
         onCreate(db);
     }
 
@@ -33,4 +33,6 @@ public class DbContextSqLiteHelper extends SQLiteOpenHelper {
     public void onDowngrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         onUpgrade(db, oldVersion, newVersion);
     }
+
+
 }
