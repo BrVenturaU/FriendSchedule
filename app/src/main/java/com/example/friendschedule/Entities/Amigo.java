@@ -1,5 +1,7 @@
 package com.example.friendschedule.Entities;
 
+import android.nfc.tech.NfcB;
+
 import java.util.Date;
 
 public class Amigo {
@@ -11,13 +13,13 @@ public class Amigo {
     private String telefono;
     private String email;
     private Date fechaNacimiento;
-    private boolean esFavorito;
+    private Boolean esFavorito;
 
     public Amigo() {
     }
 
     public Amigo(Integer id, String primerNombre, String segundoNombre, String primerApellido,
-                 String segundoApellido, String telefono, String email, Date fechaNacimiento, boolean esFavorito) {
+                 String segundoApellido, String telefono, String email, Date fechaNacimiento, Boolean esFavorito) {
         this.id = id;
         this.primerNombre = primerNombre;
         this.segundoNombre = segundoNombre;
@@ -26,6 +28,14 @@ public class Amigo {
         this.telefono = telefono;
         this.email = email;
         this.fechaNacimiento = fechaNacimiento;
+        this.esFavorito = esFavorito;
+    }
+
+    public Amigo(Integer id, String primerNombre, String primerApellido, String telefono, Boolean esFavorito) {
+        this.id = id;
+        this.primerNombre = primerNombre;
+        this.primerApellido = primerApellido;
+        this.telefono = telefono;
         this.esFavorito = esFavorito;
     }
 
@@ -97,7 +107,7 @@ public class Amigo {
         return esFavorito;
     }
 
-    public void setEsFavorito(boolean esFavorito) {
+    public void setEsFavorito(Boolean esFavorito) {
         this.esFavorito = esFavorito;
     }
 }

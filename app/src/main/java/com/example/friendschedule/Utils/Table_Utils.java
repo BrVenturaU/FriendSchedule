@@ -16,8 +16,8 @@ public class Table_Utils {
                     FeedDataContract.AmigoEntry.COLUMN_SEGUNDO_APELLIDO + " VARCHAR(20), " +
                     FeedDataContract.AmigoEntry.COLUMN_TELEFONO + " VARCHAR(15) NOT NULL, " +
                     FeedDataContract.AmigoEntry.COLUMN_EMAIL + " VARCHAR(20), " +
-                    FeedDataContract.AmigoEntry.COLUMN_FECHA_NACIMIENTO + " DATE" +
-                    FeedDataContract.AmigoEntry.COLUMN_ES_FAVORITO + " BOOLEAN);";
+                    FeedDataContract.AmigoEntry.COLUMN_FECHA_NACIMIENTO + " DATE, " +
+                    FeedDataContract.AmigoEntry.COLUMN_ES_FAVORITO + " INTEGER);";
 
     public static  final String SQL_BORRAR_ENTRADAS_AMIGO =
             "DROP TABLE IF EXISTS " + FeedDataContract.AmigoEntry.TABLE_NAME;
