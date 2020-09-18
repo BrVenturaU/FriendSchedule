@@ -28,19 +28,24 @@ public class AmigoService implements IAmigoService {
     private String query;
 
     public ArrayList<Amigo> listOfAmigos(Context context, Integer favorito){
+        //Conección con la base de datos
         contextSqLiteHelper = new DbContextSqLiteHelper(context);
-
         db = contextSqLiteHelper.getWritableDatabase();
 
+        //Creamos array de amigos
         ArrayList<Amigo> amigos = new ArrayList<>();
+
+        //Parametros de seleccion y campos de la tabla a seleccionar
         String[] parametros = {favorito.toString()};
         String[] campos = {FeedDataContract.AmigoEntry._ID, FeedDataContract.AmigoEntry.COLUMN_PRIMER_NOMBRE, FeedDataContract.AmigoEntry.COLUMN_PRIMER_APELLIDO,
             FeedDataContract.AmigoEntry.COLUMN_TELEFONO, FeedDataContract.AmigoEntry.COLUMN_ES_FAVORITO};
 
         try{
+            //Consultamos los datos (Select)
             Cursor cursor = db.query(FeedDataContract.AmigoEntry.TABLE_NAME, campos, "esFavorito = ?", parametros,
                     null, null, null);
             if(cursor != null){
+                //Recorremos cada registro
                 cursor.moveToFirst();
                 do{
                     Integer  id = cursor.getInt(cursor.getColumnIndex(FeedDataContract.AmigoEntry._ID));
@@ -49,6 +54,7 @@ public class AmigoService implements IAmigoService {
                     String telefono = cursor.getString(cursor.getColumnIndex(FeedDataContract.AmigoEntry.COLUMN_TELEFONO));
                     Integer esFavorito = cursor.getInt(cursor.getColumnIndex(FeedDataContract.AmigoEntry.COLUMN_ES_FAVORITO));
 
+                    //Agregamos un amigo a la lista
                     amigos.add(cursor.getPosition(),
                             new Amigo(id, nombre, apellido, telefono, esFavorito == 0 ? false : true));
                 }while(cursor.moveToNext());
@@ -61,6 +67,7 @@ public class AmigoService implements IAmigoService {
             return amigos;
 
         } catch (SQLiteException ex){
+            //Registramos en el Logcat el error con el tag 'amigo'
             Log.e("amigo", ex.getMessage());
             return null;
         }
