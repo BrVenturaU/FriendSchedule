@@ -49,7 +49,7 @@ public class FavoritosFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
         amigoService = new AmigoService();
-        amigos = amigoService.listOfAmigos(getContext(), 1);
+        amigos = amigoService.getAll(getContext(), 1);
         if(amigos == null)
             scrollView.setVisibility(View.VISIBLE);
         else{
