@@ -7,5 +7,5 @@ import com.example.friendschedule.Entities.Amigo;
 import java.util.ArrayList;
 
 public interface IAmigoService {
-    ArrayList<Amigo> listOfAmigos(Context context);
+    ArrayList<Amigo> listOfAmigos(Context context, Integer favorito);
 }

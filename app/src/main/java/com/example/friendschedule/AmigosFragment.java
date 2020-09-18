@@ -46,7 +46,7 @@ public class AmigosFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
         amigoService = new AmigoService();
-        amigos = amigoService.listOfAmigos(getContext());
+        amigos = amigoService.listOfAmigos(getContext(), 0);
         if(amigos == null)
             scrollView.setVisibility(View.VISIBLE);
         else{

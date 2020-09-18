@@ -16,6 +16,10 @@ import com.example.friendschedule.Interfaces.IAmigoService;
 import java.util.ArrayList;
 
 public class AmigoService implements IAmigoService {
+
+    //TODO listar no favoritos y favoritos
+    //TODO Actualizar un registro a favorito o no favorito
+    //TODO Eliminar un amigo
     public AmigoService() {
     }
 
@@ -23,24 +27,37 @@ public class AmigoService implements IAmigoService {
     private SQLiteDatabase db;
     private String query;
 
-    public ArrayList<Amigo> listOfAmigos(Context context){
+    public ArrayList<Amigo> listOfAmigos(Context context, Integer favorito){
         contextSqLiteHelper = new DbContextSqLiteHelper(context);
 
         db = contextSqLiteHelper.getWritableDatabase();
 
         ArrayList<Amigo> amigos = new ArrayList<>();
-        String[] parametros = null;
+        String[] parametros = {favorito.toString()};
         String[] campos = {FeedDataContract.AmigoEntry._ID, FeedDataContract.AmigoEntry.COLUMN_PRIMER_NOMBRE, FeedDataContract.AmigoEntry.COLUMN_PRIMER_APELLIDO,
             FeedDataContract.AmigoEntry.COLUMN_TELEFONO, FeedDataContract.AmigoEntry.COLUMN_ES_FAVORITO};
 
         try{
-            Cursor cursor = db.query(FeedDataContract.AmigoEntry.TABLE_NAME, campos, null, null,
+            Cursor cursor = db.query(FeedDataContract.AmigoEntry.TABLE_NAME, campos, "esFavorito = ?", parametros,
                     null, null, null);
-            while(cursor.moveToNext()){
-                amigos.add(cursor.getPosition(),
-                        new Amigo(Integer.parseInt(cursor.getString(0)), cursor.getString(1), cursor.getString(2),
-                        cursor.getString(3), cursor.getInt(4) == 0 ? false : true));
+            if(cursor != null){
+                cursor.moveToFirst();
+                do{
+                    Integer  id = cursor.getInt(cursor.getColumnIndex(FeedDataContract.AmigoEntry._ID));
+                    String nombre = cursor.getString(cursor.getColumnIndex(FeedDataContract.AmigoEntry.COLUMN_PRIMER_NOMBRE));
+                    String apellido = cursor.getString(cursor.getColumnIndex(FeedDataContract.AmigoEntry.COLUMN_PRIMER_APELLIDO));
+                    String telefono = cursor.getString(cursor.getColumnIndex(FeedDataContract.AmigoEntry.COLUMN_TELEFONO));
+                    Integer esFavorito = cursor.getInt(cursor.getColumnIndex(FeedDataContract.AmigoEntry.COLUMN_ES_FAVORITO));
+
+                    amigos.add(cursor.getPosition(),
+                            new Amigo(id, nombre, apellido, telefono, esFavorito == 0 ? false : true));
+                }while(cursor.moveToNext());
             }
+
+            //Cerramos cursor y la base de datos
+            cursor.close();
+            db.close();
+
             return amigos;
 
         } catch (SQLiteException ex){
