@@ -17,6 +17,7 @@ public final class FeedDataContract {
         public static final String COLUMN_TELEFONO = "telefono";
         public static final String COLUMN_EMAIL = "email";
         public static final String COLUMN_FECHA_NACIMIENTO = "fechaNacimiento";
+        public static final String COLUMN_ES_FAVORITO = "esFavorito";
     }
 
 

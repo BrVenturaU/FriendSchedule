@@ -11,13 +11,13 @@ public class Amigo {
     private String telefono;
     private String email;
     private Date fechaNacimiento;
+    private boolean esFavorito;
 
     public Amigo() {
     }
 
-    public Amigo(Integer id, String primerNombre, String segundoNombre,
-                 String primerApellido, String segundoApellido, String telefono,
-                 String email, Date fechaNacimiento) {
+    public Amigo(Integer id, String primerNombre, String segundoNombre, String primerApellido,
+                 String segundoApellido, String telefono, String email, Date fechaNacimiento, boolean esFavorito) {
         this.id = id;
         this.primerNombre = primerNombre;
         this.segundoNombre = segundoNombre;
@@ -26,6 +26,7 @@ public class Amigo {
         this.telefono = telefono;
         this.email = email;
         this.fechaNacimiento = fechaNacimiento;
+        this.esFavorito = esFavorito;
     }
 
     public Integer getId() {
@@ -90,5 +91,13 @@ public class Amigo {
 
     public void setFechaNacimiento(Date fechaNacimiento) {
         this.fechaNacimiento = fechaNacimiento;
+    }
+
+    public boolean getEsFavorito() {
+        return esFavorito;
+    }
+
+    public void setEsFavorito(boolean esFavorito) {
+        this.esFavorito = esFavorito;
     }
 }
