@@ -45,19 +45,22 @@ public class AmigoService implements IAmigoService {
             Cursor cursor = db.query(FeedDataContract.AmigoEntry.TABLE_NAME, campos, FeedDataContract.AmigoEntry.COLUMN_ES_FAVORITO + " = ?", parametros,
                     null, null, null);
             if(cursor != null){
+                Integer  id = 0;
+                String nombre = "";
+                String apellido = "";
+                String telefono = "";
+                Integer esFavorito = 0;
                 //Recorremos cada registro
                 cursor.moveToFirst();
                 do{
-                    Integer  id = cursor.getInt(cursor.getColumnIndex(FeedDataContract.AmigoEntry._ID));
-                    String nombre = cursor.getString(cursor.getColumnIndex(FeedDataContract.AmigoEntry.COLUMN_PRIMER_NOMBRE));
-                    String apellido = cursor.getString(cursor.getColumnIndex(FeedDataContract.AmigoEntry.COLUMN_PRIMER_APELLIDO));
-                    String telefono = cursor.getString(cursor.getColumnIndex(FeedDataContract.AmigoEntry.COLUMN_TELEFONO));
-                    Integer esFavorito = cursor.getInt(cursor.getColumnIndex(FeedDataContract.AmigoEntry.COLUMN_ES_FAVORITO));
-
-                    Amigo amigo = new Amigo(id, nombre, apellido, telefono, esFavorito == 0 ? false : true);
+                    id = cursor.getInt(cursor.getColumnIndex(FeedDataContract.AmigoEntry._ID));
+                    nombre = cursor.getString(cursor.getColumnIndex(FeedDataContract.AmigoEntry.COLUMN_PRIMER_NOMBRE));
+                    apellido = cursor.getString(cursor.getColumnIndex(FeedDataContract.AmigoEntry.COLUMN_PRIMER_APELLIDO));
+                    telefono = cursor.getString(cursor.getColumnIndex(FeedDataContract.AmigoEntry.COLUMN_TELEFONO));
+                    esFavorito = cursor.getInt(cursor.getColumnIndex(FeedDataContract.AmigoEntry.COLUMN_ES_FAVORITO));
 
                     //Agregamos un amigo a la lista
-                    amigos.add(amigo);
+                    amigos.add(new Amigo(id, nombre, apellido, telefono, esFavorito == 0 ? false : true));
                 }while(cursor.moveToNext());
             }
 
