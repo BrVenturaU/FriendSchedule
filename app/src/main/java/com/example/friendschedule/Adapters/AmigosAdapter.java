@@ -8,6 +8,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.friendschedule.Entities.Amigo;
@@ -28,7 +29,7 @@ public class AmigosAdapter extends RecyclerView.Adapter<AmigosAdapter.ViewHolder
 
     public void setData(ArrayList<Amigo> list, IAmigoService service){
         amigos = list;
-        amigoService = service;
+        amigoService = amigoService;
         notifyDataSetChanged();
     }
 
@@ -39,7 +40,7 @@ public class AmigosAdapter extends RecyclerView.Adapter<AmigosAdapter.ViewHolder
             super(itemView);
             tvNombreCompleto = itemView.findViewById(R.id.tvNombreCompleto);
             tvTelefono = itemView.findViewById(R.id.tvTelefono);
-            btnFavorito = itemView.findViewById(R.id.btnFavorito);
+            btnFavorito = itemView.findViewById(R.id.btnEditar);
         }
     }
 
@@ -66,13 +67,15 @@ public class AmigosAdapter extends RecyclerView.Adapter<AmigosAdapter.ViewHolder
         return amigos.size();
     }
 
+    public void setOnclicListener(View.OnClickListener listener){this.listener = listener;}
+
     @Override
     public void onClick(View view) {
         if(listener != null)
             listener.onClick(view);
     }
 
-    public void setAmigoData(Amigo amigo, ViewHolder holder){
+    private void setAmigoData(final Amigo amigo, ViewHolder holder){
         holder.tvNombreCompleto.setText(amigo.getPrimerNombre() + " " + amigo.getPrimerApellido());
         holder.tvTelefono.setText(amigo.getTelefono());
         if(amigo.getEsFavorito())

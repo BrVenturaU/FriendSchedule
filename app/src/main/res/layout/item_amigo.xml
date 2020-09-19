@@ -38,7 +38,7 @@
                 android:textColor="@color/colorPrimaryDark"
                 android:textStyle="bold"
                 app:layout_constraintLeft_toRightOf="@id/imvIcAmigo"
-                app:layout_constraintRight_toLeftOf="@id/btnFavorito"
+                app:layout_constraintRight_toLeftOf="@id/btnEditar"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toTopOf="@id/tvTelefono"
                 />
@@ -52,15 +52,15 @@
                 android:textSize="18dp"
                 android:layout_marginLeft="4dp"
                 app:layout_constraintStart_toEndOf="@id/imvIcAmigo"
-                app:layout_constraintEnd_toStartOf="@id/btnFavorito"
+                app:layout_constraintEnd_toStartOf="@id/btnEditar"
                 app:layout_constraintTop_toBottomOf="@id/tvNombreCompleto"
                 app:layout_constraintBottom_toBottomOf="parent"
                 />
             <ImageButton
-                android:id="@+id/btnFavorito"
+                android:id="@+id/btnEditar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_favorite_remove"
+                android:src="@drawable/ic_edit"
                 android:layout_marginRight="12dp"
                 android:background="@android:color/transparent"
                 app:layout_constraintEnd_toEndOf="parent"
