@@ -13,8 +13,10 @@ import com.example.friendschedule.DataContext.DbContextSqLiteHelper;
 import com.example.friendschedule.Entities.Amigo;
 import com.example.friendschedule.Interfaces.IAmigoService;
 
-import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class AmigoService implements IAmigoService {
 
@@ -101,16 +103,16 @@ public class AmigoService implements IAmigoService {
                 String segundoApellido = cursor.getString(cursor.getColumnIndex(FeedDataContract.AmigoEntry.COLUMN_SEGUNDO_APELLIDO));
                 String telefono = cursor.getString(cursor.getColumnIndex(FeedDataContract.AmigoEntry.COLUMN_TELEFONO));
                 String email = cursor.getString(cursor.getColumnIndex(FeedDataContract.AmigoEntry.COLUMN_EMAIL));
-                String fechaNacimiento = cursor.getString(cursor.getColumnIndex(FeedDataContract.AmigoEntry.COLUMN_FECHA_NACIMIENTO));
+                String fecha = cursor.getString(cursor.getColumnIndex(FeedDataContract.AmigoEntry.COLUMN_FECHA_NACIMIENTO));
                 Integer esFavorito = cursor.getInt(cursor.getColumnIndex(FeedDataContract.AmigoEntry.COLUMN_ES_FAVORITO));
-
+                Date fechaNacimiento = new SimpleDateFormat("dd-MM-yyyy").parse(fecha);
                 //Pasamos los datos al objeto amigo
                 amigo = new Amigo(idAmigo, primerNombre, segundoNombre, primerApellido, segundoApellido, telefono,
-                        email, Date.valueOf(fechaNacimiento), esFavorito == 0 ? false : true);
+                        email, fechaNacimiento, esFavorito == 0 ? false : true);
             }
 
             return amigo;
-        }catch (SQLiteException ex){
+        }catch (SQLiteException | ParseException ex){
 
             Log.e("amigo", ex.getMessage());
             return null;

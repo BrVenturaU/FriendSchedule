@@ -1,6 +1,7 @@
 package com.example.friendschedule;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -61,7 +62,10 @@ public class AmigosFragment extends Fragment implements View.OnClickListener{
             amigosAdapter.setOnclicListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Toast.makeText(context, "Adapter", Toast.LENGTH_SHORT).show();
+                    int idAmigo = amigos.get(recyclerView.getChildAdapterPosition(view)).getId();
+                    Intent intent = new Intent(context, InformacionAmigoActivity.class);
+                    intent.putExtra("idAmigo", idAmigo);
+                    startActivity(intent);
                 }
             });
         }

@@ -1,5 +1,7 @@
 package com.example.friendschedule;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -18,13 +20,14 @@ import com.example.friendschedule.Services.AmigoService;
 
 import java.util.ArrayList;
 
-public class FavoritosFragment extends Fragment {
+public class FavoritosFragment extends Fragment implements View.OnClickListener {
 
     private RecyclerView recyclerView;
     private AmigosAdapter amigosAdapter;
     private IAmigoService amigoService;
     private ArrayList<Amigo> amigos;
     private ScrollView scrollView;
+    private Context context;
 
     public FavoritosFragment() {
         // Required empty public constructor
@@ -42,22 +45,37 @@ public class FavoritosFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_favoritos, container, false);
+        context = getContext();
 
         recyclerView = view.findViewById(R.id.rvAmigos);
         scrollView = view.findViewById(R.id.layoutVacio);
 
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerView.setLayoutManager(new LinearLayoutManager(context));
 
         amigoService = new AmigoService();
-        amigos = amigoService.getAll(getContext(), 1);
+        amigos = amigoService.getAll(context, 1);
         if(amigos == null)
             scrollView.setVisibility(View.VISIBLE);
         else{
             amigosAdapter = new AmigosAdapter();
             amigosAdapter.setData(amigos, amigoService);
             recyclerView.setAdapter(amigosAdapter);
+            amigosAdapter.setOnclicListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    int idAmigo = amigos.get(recyclerView.getChildAdapterPosition(view)).getId();
+                    Intent intent = new Intent(context, InformacionAmigoActivity.class);
+                    intent.putExtra("idAmigo", idAmigo);
+                    startActivity(intent);
+                }
+            });
         }
 
         return view;
+    }
+
+    @Override
+    public void onClick(View view) {
+
     }
 }

@@ -78,9 +78,5 @@ public class AmigosAdapter extends RecyclerView.Adapter<AmigosAdapter.ViewHolder
     private void setAmigoData(final Amigo amigo, ViewHolder holder){
         holder.tvNombreCompleto.setText(amigo.getPrimerNombre() + " " + amigo.getPrimerApellido());
         holder.tvTelefono.setText(amigo.getTelefono());
-        if(amigo.getEsFavorito())
-            holder.btnFavorito.setImageResource(R.drawable.ic_favorite_added);
-        else
-            holder.btnFavorito.setImageResource(R.drawable.ic_favorite_remove);
     }
 }
