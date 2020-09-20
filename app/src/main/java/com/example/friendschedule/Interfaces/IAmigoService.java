@@ -10,4 +10,5 @@ public interface IAmigoService {
     ArrayList<Amigo> getAll(Context context, Integer favorito);
     Amigo getById(Context context, Integer id);
     Amigo changeFavorite(Context context, Integer id, Integer favorito);
+    Boolean delete(Context context, Integer id);
 }

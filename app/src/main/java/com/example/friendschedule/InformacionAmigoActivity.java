@@ -2,6 +2,7 @@ package com.example.friendschedule;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
@@ -40,9 +41,16 @@ public class InformacionAmigoActivity extends AppCompatActivity implements View.
         btnEliminar = findViewById(R.id.btnEliminar);
 
         btnFavorito.setOnClickListener(InformacionAmigoActivity.this);
+        btnEliminar.setOnClickListener(InformacionAmigoActivity.this);
         setAmigoData();
+    }
 
-
+    @Override
+    protected void onDestroy() {
+        Intent intent = new Intent(InformacionAmigoActivity.this, MainActivity.class);
+        startActivity(intent);
+        finish();
+        super.onDestroy();
     }
 
     @Override
@@ -63,7 +71,12 @@ public class InformacionAmigoActivity extends AppCompatActivity implements View.
                 break;
             }
             case R.id.btnEliminar:{
-
+                Boolean isDeleted = amigoService.delete(InformacionAmigoActivity.this, amigo.getId());
+                if(isDeleted){
+                    Intent intent = new Intent(InformacionAmigoActivity.this, MainActivity.class);
+                    startActivity(intent);
+                    finish();
+                }
                 break;
             }
         }

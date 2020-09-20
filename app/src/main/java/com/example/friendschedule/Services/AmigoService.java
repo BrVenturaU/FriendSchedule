@@ -71,7 +71,7 @@ public class AmigoService implements IAmigoService {
 
             return amigos;
 
-        } catch (SQLiteException ex){
+        } catch (Exception ex){
             //Registramos en el Logcat el error con el tag 'amigo'
             db.close();
             Log.e("amigo", ex.getMessage());
@@ -82,9 +82,6 @@ public class AmigoService implements IAmigoService {
     public Amigo getById(Context context, Integer id){
         contextSqLiteHelper = new DbContextSqLiteHelper(context);
         db = contextSqLiteHelper.getWritableDatabase();
-
-        //Creamos array de amigos
-        ArrayList<Amigo> amigos = new ArrayList<>();
 
         //Parametros de seleccion y campos de la tabla a seleccionar
         String[] parametros = {id.toString()};
@@ -148,9 +145,30 @@ public class AmigoService implements IAmigoService {
             Toast.makeText(context, response, Toast.LENGTH_SHORT).show();
             return null;
         }
+    }
 
+    public Boolean delete(Context context, Integer id){
+        contextSqLiteHelper = new DbContextSqLiteHelper(context);
+        db = contextSqLiteHelper.getWritableDatabase();
 
+        String response = "";
+        String[] parametros = {id.toString()};
 
+        try{
+            int filasAfectadas = db.delete(FeedDataContract.AmigoEntry.TABLE_NAME,
+                    FeedDataContract.AmigoEntry._ID + " = ?", parametros);
+            Boolean isModified = filasAfectadas != 0 ? true : false;
+            response = isModified ? "Amigo eliminado" : "No se pudo eliminar el amigo";
+
+            Toast.makeText(context, response, Toast.LENGTH_SHORT).show();
+            return isModified;
+
+        }catch (SQLiteException ex){
+            Log.e("amigo", ex.getMessage());
+            response = "Ha ocurrido un error interno";
+            Toast.makeText(context, response, Toast.LENGTH_SHORT).show();
+            return false;
+        }
     }
 
 
