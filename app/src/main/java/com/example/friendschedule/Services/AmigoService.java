@@ -196,6 +196,28 @@ public class AmigoService implements IAmigoService {
         }
     }
 
+    public long insert(Context context, Amigo amigo){
+        contextSqLiteHelper = new DbContextSqLiteHelper(context);
+        db = contextSqLiteHelper.getWritableDatabase();
+
+        String patron = "dd-MM-yyyy";
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(patron);
+        String fechaNacimiento = simpleDateFormat.format(amigo.getFechaNacimiento());
+        Integer favorito = amigo.getEsFavorito() ? 1 : 0;
+
+        ContentValues data = new ContentValues();
+        data.put(FeedDataContract.AmigoEntry.COLUMN_PRIMER_NOMBRE, amigo.getPrimerNombre());
+        data.put(FeedDataContract.AmigoEntry.COLUMN_SEGUNDO_NOMBRE, amigo.getSegundoNombre());
+        data.put(FeedDataContract.AmigoEntry.COLUMN_PRIMER_APELLIDO, amigo.getPrimerApellido());
+        data.put(FeedDataContract.AmigoEntry.COLUMN_SEGUNDO_APELLIDO, amigo.getSegundoApellido());
+        data.put(FeedDataContract.AmigoEntry.COLUMN_TELEFONO, amigo.getTelefono());
+        data.put(FeedDataContract.AmigoEntry.COLUMN_EMAIL, amigo.getEmail());
+        data.put(FeedDataContract.AmigoEntry.COLUMN_FECHA_NACIMIENTO, fechaNacimiento);
+        data.put(FeedDataContract.AmigoEntry.COLUMN_ES_FAVORITO, favorito);
+
+        return db.insert(FeedDataContract.AmigoEntry.TABLE_NAME, null, data);
+    }
+
     public Boolean delete(Context context, Integer id){
         contextSqLiteHelper = new DbContextSqLiteHelper(context);
         db = contextSqLiteHelper.getWritableDatabase();

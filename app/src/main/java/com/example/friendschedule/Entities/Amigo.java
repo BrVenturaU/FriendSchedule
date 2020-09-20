@@ -18,6 +18,18 @@ public class Amigo {
     public Amigo() {
     }
 
+    public Amigo(String primerNombre, String segundoNombre, String primerApellido,
+                 String segundoApellido, String telefono, String email, Date fechaNacimiento, Boolean esFavorito) {
+        this.primerNombre = primerNombre;
+        this.segundoNombre = segundoNombre;
+        this.primerApellido = primerApellido;
+        this.segundoApellido = segundoApellido;
+        this.telefono = telefono;
+        this.email = email;
+        this.fechaNacimiento = fechaNacimiento;
+        this.esFavorito = esFavorito;
+    }
+
     public Amigo(Integer id, String primerNombre, String segundoNombre, String primerApellido,
                  String segundoApellido, String telefono, String email, Date fechaNacimiento, Boolean esFavorito) {
         this.id = id;
