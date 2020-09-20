@@ -1,5 +1,11 @@
 <resources>
     <string name="app_name">FriendSchedule</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="list">Lista de contactos</string>
+    <string name="add">Agregar contacto</string>
+
+    <!--Activity de Agregar contactos-->
+    <string name="nombre">Nombre</string>
+    <string name="numero">Numero de telefono</string>
+    <string name="btGuardar">Guardar</string>
+    <string name="btCancelar">Cancelar</string>
 </resources>
