@@ -119,7 +119,7 @@ public class AmigoService implements IAmigoService {
         }
     }
 
-    public void changeFavorite(Context context, Integer id, Integer favorito){
+    public Amigo changeFavorite(Context context, Integer id, Integer favorito){
         contextSqLiteHelper = new DbContextSqLiteHelper(context);
         db = contextSqLiteHelper.getWritableDatabase();
 
@@ -131,13 +131,25 @@ public class AmigoService implements IAmigoService {
         try{
             int filasAfectadas = db.update(FeedDataContract.AmigoEntry.TABLE_NAME, values,
                     FeedDataContract.AmigoEntry._ID + " = ?", parametros);
-            response = filasAfectadas != 0 ? "Favorito modificado" : "No se pudo modificar el amigo";
+            Boolean isModified = filasAfectadas != 0 ? true : false;
+            Amigo amigo = null;
+            if(isModified){
+                amigo = getById(context, id);
+                response = "Favorito modificado";
+            }else{
+                response = "No se pudo modificar el amigo";
+            }
+            Toast.makeText(context, response, Toast.LENGTH_SHORT).show();
+            return amigo;
+
         }catch (SQLiteException ex){
             Log.e("amigo", ex.getMessage());
             response = "Ha ocurrido un error interno";
+            Toast.makeText(context, response, Toast.LENGTH_SHORT).show();
+            return null;
         }
 
-        Toast.makeText(context, response, Toast.LENGTH_SHORT).show();
+
 
     }
 

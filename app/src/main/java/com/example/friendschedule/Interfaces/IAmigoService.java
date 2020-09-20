@@ -9,5 +9,5 @@ import java.util.ArrayList;
 public interface IAmigoService {
     ArrayList<Amigo> getAll(Context context, Integer favorito);
     Amigo getById(Context context, Integer id);
-    void changeFavorite(Context context, Integer id, Integer favorito);
+    Amigo changeFavorite(Context context, Integer id, Integer favorito);
 }
