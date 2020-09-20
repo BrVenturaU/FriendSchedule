@@ -10,6 +10,8 @@ import com.example.friendschedule.Entities.Amigo;
 import com.example.friendschedule.Interfaces.IAmigoService;
 import com.example.friendschedule.Services.AmigoService;
 
+import java.text.SimpleDateFormat;
+
 public class InformacionAmigoActivity extends AppCompatActivity {
 
     private Amigo amigo;
@@ -33,12 +35,21 @@ public class InformacionAmigoActivity extends AppCompatActivity {
         tvEmail = findViewById(R.id.tvEmail);
         tvFechaNacimiento = findViewById(R.id.tvFechaNacimiento);
 
-        String nombreCompleto = amigo.getPrimerNombre() + " " + amigo.getSegundoNombre() + " " + amigo.getPrimerApellido() + " " + amigo.getSegundoApellido();
+        String primerNombre = amigo.getPrimerNombre();
+        String segundoNombre = amigo.getSegundoNombre() == null ? "" : amigo.getSegundoNombre();
+        String primerApellido = amigo.getPrimerApellido();
+        String segundoApellido = amigo.getSegundoApellido() == null ? "" : amigo.getSegundoApellido();
+        String nombreCompleto = primerNombre + " " + segundoApellido + " " + primerApellido + " " + segundoApellido;
+        String email = amigo.getEmail();
+        String patron = "dd-MM-yyyy";
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(patron);
+        String fechaNacimiento = simpleDateFormat.format(amigo.getFechaNacimiento());
 
         tvNombreCompleto.setText(nombreCompleto);
         tvTelefono.setText(amigo.getTelefono());
-        tvEmail.setText(amigo.getEmail());
-        tvFechaNacimiento.setText(amigo.getFechaNacimiento().toString());
+
+        tvEmail.setText(email == null ? "No se ha agregado." : email);
+        tvFechaNacimiento.setText(fechaNacimiento);
 
 
     }
