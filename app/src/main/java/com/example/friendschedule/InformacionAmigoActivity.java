@@ -3,6 +3,8 @@ package com.example.friendschedule;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -12,13 +14,13 @@ import com.example.friendschedule.Services.AmigoService;
 
 import java.text.SimpleDateFormat;
 
-public class InformacionAmigoActivity extends AppCompatActivity {
+public class InformacionAmigoActivity extends AppCompatActivity implements View.OnClickListener {
 
     private Amigo amigo;
     private IAmigoService amigoService;
     private TextView tvNombreCompleto, tvTelefono, tvEmail, tvFechaNacimiento;
+    private ImageButton btnFavorito, btnEliminar;
 
-    //TODO Mostrar datos en la pantalla
     //TODO Permitir agregar a favoritos
     //TODO Permitir eliminar registro
     @Override
@@ -34,6 +36,8 @@ public class InformacionAmigoActivity extends AppCompatActivity {
         tvTelefono = findViewById(R.id.tvTelefono);
         tvEmail = findViewById(R.id.tvEmail);
         tvFechaNacimiento = findViewById(R.id.tvFechaNacimiento);
+        btnFavorito = findViewById(R.id.btnFavorito);
+        btnEliminar = findViewById(R.id.btnEliminar);
 
         String primerNombre = amigo.getPrimerNombre();
         String segundoNombre = amigo.getSegundoNombre() == null ? "" : amigo.getSegundoNombre();
@@ -52,5 +56,19 @@ public class InformacionAmigoActivity extends AppCompatActivity {
         tvFechaNacimiento.setText(fechaNacimiento);
 
 
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()){
+            case R.id.btnFavorito:{
+
+                break;
+            }
+            case R.id.btnEliminar:{
+
+                break;
+            }
+        }
     }
 }
