@@ -4,68 +4,107 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-public class AgregarActivity extends AppCompatActivity {
-    private Button btnGuardar, btnCancelar;
-    private EditText etNombre, etNumero;
+import com.example.friendschedule.Entities.Amigo;
+import com.example.friendschedule.Interfaces.IAmigoService;
+import com.example.friendschedule.Services.AmigoService;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+public class AgregarActivity extends AppCompatActivity implements View.OnClickListener {
+    private Button btnGuardar, btnCancelar;
+    private EditText etPrimerNombre, etSegundoNombre, etPrimerApellido, etSegundoApellido, etTelefono, etEmail, etFechaNacimiento;
+    private IAmigoService amigoService;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_agregar);
 
+        amigoService = new AmigoService();
         btnGuardar = findViewById(R.id.btnGuardar);
         btnCancelar=findViewById(R.id.btnCancelar);
-//        etNombre=findViewById(R.id.etNombre);
-//        etNumero=findViewById(R.id.etNumero);
+        etPrimerNombre=findViewById(R.id.etPrimerNombre);
+        etSegundoNombre=findViewById(R.id.etSegundoNombre);
+        etPrimerApellido=findViewById(R.id.etPrimerApellido);
+        etSegundoApellido=findViewById(R.id.etSegundoApellido);
+        etTelefono=findViewById(R.id.etTelefono);
+        etEmail=findViewById(R.id.etEmail);
+        etFechaNacimiento = findViewById(R.id.etFechaNacimiento);
 
-        btnCancelar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(AgregarActivity.this, MainActivity.class);
-                startActivity(intent);
+        btnGuardar.setOnClickListener(AgregarActivity.this);
+        btnCancelar.setOnClickListener(AgregarActivity.this);
 
-                Toast.makeText(AgregarActivity.this , "No hay contenido para guardar. Contacto descardato.", Toast.LENGTH_LONG).show();
-            }
-        });
-
-        btnGuardar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                switch (view.getId()){
-                    case R.id.btnCancelar:
-                        limpiar();
-                        break;
-
-                    case R.id.btnGuardar:
-//                        String nombre  = etNombre.getText().toString();
-//                        int numero = Integer.valueOf(etNumero.getText().toString());
-//                        Agregar a = new Agregar(nombre, numero);
-//                        AgregarDAO dao = new AgregarDAO(AgregarActivity.this);
-//                        long res  = dao.insert(a);
-//                        if(res!= -1){
-//                            Toast.makeText(AgregarActivity.this, "Contacto guardado "+ res, Toast.LENGTH_LONG).show();
-//                            limpiar();
-//                        }
-//                        break;
-                }
-
-
-                Intent intent = new Intent(AgregarActivity.this, MainActivity.class);
-                startActivity(intent);
-
-                Toast.makeText(AgregarActivity.this, "Nuevo contacto guardado.", Toast.LENGTH_LONG).show();
-            }
-        });
     }
 
-    public void limpiar(){
-        etNombre.setText("");
-        etNumero.setText("");
+    @Override
+    public void onClick(View view) {
+        Intent intent = null;
+        switch (view.getId()){
+            case R.id.btnGuardar:{
+                String primerNombre = etPrimerNombre.getText().toString();
+                String segundoNombre = etSegundoNombre.getText().toString();
+                String primerApellido = etPrimerApellido.getText().toString();
+                String segundoApellido = etSegundoApellido.getText().toString();
+                String telefono = etTelefono.getText().toString();
+                String email = etEmail.getText().toString();
+                String fecha = etFechaNacimiento.getText().toString();
+
+                boolean isValidData = validateData(primerNombre, primerApellido, telefono);
+                if(isValidData){
+                    try {
+                        Date fechaNacimiento = new SimpleDateFormat("dd-MM-yyyy").parse(fecha);
+                        Amigo amigo = new Amigo(primerNombre, segundoNombre, primerApellido,
+                                segundoApellido, telefono, email, fechaNacimiento, false);
+                        long res  = amigoService.insert(AgregarActivity.this, amigo);
+                        if(res!= -1){
+                            Toast.makeText(AgregarActivity.this, "Contacto guardado", Toast.LENGTH_SHORT).show();
+                            intent = new Intent(AgregarActivity.this, InformacionAmigoActivity.class);
+                            intent.putExtra("idAmigo", res);
+                            startActivity(intent);
+                            finish();
+                        }else{
+                            Toast.makeText(AgregarActivity.this, "No se pudo registrar el contacto.", Toast.LENGTH_SHORT).show();
+                        }
+                    }catch (Exception ex){
+                        Log.e("amigo", ex.getMessage());
+                        Toast.makeText(AgregarActivity.this, ex.getMessage(), Toast.LENGTH_LONG).show();
+                    }
+                }
+                break;
+            }
+            case R.id.btnCancelar:{
+                Toast.makeText(AgregarActivity.this , "No hay contenido para guardar. Contacto descardato.", Toast.LENGTH_SHORT).show();
+                intent = new Intent(AgregarActivity.this, MainActivity.class);
+                startActivity(intent);
+                finish();
+
+                break;
+            }
+        }
+    }
+
+    private boolean validateData(String primerNombre, String primerApellido, String telefono){
+        if(primerNombre.isEmpty()){
+            Toast.makeText(AgregarActivity.this, "El primer nombre es obligatorio", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        if(primerApellido.isEmpty()){
+            Toast.makeText(AgregarActivity.this, "El primer apellido es obligatorio", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        if(telefono.isEmpty()){
+            Toast.makeText(AgregarActivity.this, "El telefono es obligatorio", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        return true;
     }
 }

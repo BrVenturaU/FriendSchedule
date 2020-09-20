@@ -71,7 +71,7 @@
 
 
         <EditText
-            android:id="@+id/editTextTextEmailAddress"
+            android:id="@+id/etEmail"
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:ems="10"
@@ -81,7 +81,7 @@
             android:layout_marginBottom="16dp"/>
 
         <EditText
-            android:id="@+id/editTextDate"
+            android:id="@+id/etFechaNacimiento"
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:ems="10"
