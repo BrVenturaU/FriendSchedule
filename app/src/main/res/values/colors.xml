@@ -4,4 +4,5 @@
     <color name="colorPrimaryDark">#002F6C</color>
     <color name="colorAccent">#4F83CC</color>
     <color name="colorFondo">#FFFFFF</color>
+    <color name="cancelButton">#bd0d00</color>
 </resources>
