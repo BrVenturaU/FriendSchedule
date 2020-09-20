@@ -80,7 +80,7 @@ public class AgregarActivity extends AppCompatActivity implements View.OnClickLi
             }
             case R.id.btnCancelar:{
                 Toast.makeText(AgregarActivity.this , "No hay contenido para guardar. Contacto descardato.", Toast.LENGTH_SHORT).show();
-                intent = new Intent(AgregarActivity.this, MainActivity.class);
+                intent = new Intent(AgregarActivity.this, HomeActivity.class);
                 startActivity(intent);
                 finish();
 
