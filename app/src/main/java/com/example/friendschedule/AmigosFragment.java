@@ -1,5 +1,6 @@
 package com.example.friendschedule;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -51,7 +52,7 @@ public class AmigosFragment extends Fragment implements View.OnClickListener{
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
 
         amigoService = new AmigoService();
-        amigos = amigoService.getAll(context, 0);
+        amigos = amigoService.getAll(context);
         if(amigos == null)
             scrollView.setVisibility(View.VISIBLE);
         else{
@@ -66,6 +67,7 @@ public class AmigosFragment extends Fragment implements View.OnClickListener{
                     Intent intent = new Intent(context, InformacionAmigoActivity.class);
                     intent.putExtra("idAmigo", idAmigo);
                     startActivity(intent);
+                    ((Activity)context).finish();
                 }
             });
         }
