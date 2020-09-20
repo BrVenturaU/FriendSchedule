@@ -47,9 +47,6 @@ public class InformacionAmigoActivity extends AppCompatActivity implements View.
 
     @Override
     protected void onDestroy() {
-        Intent intent = new Intent(InformacionAmigoActivity.this, MainActivity.class);
-        startActivity(intent);
-        finish();
         super.onDestroy();
     }
 

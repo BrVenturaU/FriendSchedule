@@ -52,7 +52,7 @@ public class AmigosFragment extends Fragment implements View.OnClickListener{
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
 
         amigoService = new AmigoService();
-        amigos = amigoService.getAll(context, 0);
+        amigos = amigoService.getAll(context);
         if(amigos == null)
             scrollView.setVisibility(View.VISIBLE);
         else{
