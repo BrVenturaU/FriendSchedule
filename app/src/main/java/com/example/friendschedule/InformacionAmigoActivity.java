@@ -70,7 +70,7 @@ public class InformacionAmigoActivity extends AppCompatActivity implements View.
             case R.id.btnEliminar:{
                 Boolean isDeleted = amigoService.delete(InformacionAmigoActivity.this, amigo.getId());
                 if(isDeleted){
-                    Intent intent = new Intent(InformacionAmigoActivity.this, MainActivity.class);
+                    Intent intent = new Intent(InformacionAmigoActivity.this, HomeActivity.class);
                     startActivity(intent);
                     finish();
                 }

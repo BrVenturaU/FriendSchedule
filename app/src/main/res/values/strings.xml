@@ -14,4 +14,8 @@
     <string name="fecha_nacimiento">Fecha de Nacimiento</string>
     <string name="btGuardar">Guardar</string>
     <string name="btCancelar">Cancelar</string>
+    <string name="home_description">
+        Agrega a todos tus amigos y recuerdalos en todo momento.
+        Recuerda sus fechas de cumpleaños y más.
+    </string>
 </resources>
