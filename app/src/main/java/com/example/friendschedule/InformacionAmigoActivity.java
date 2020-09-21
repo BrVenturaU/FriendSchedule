@@ -29,7 +29,7 @@ public class InformacionAmigoActivity extends AppCompatActivity implements View.
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_informacion_amigo);
 
-        final int idAmigo =getIntent().getExtras().getInt("idAmigo");
+        final int idAmigo = getIntent().getExtras().getInt("idAmigoInfo");
         amigoService = new AmigoService();
         amigo = amigoService.getById(InformacionAmigoActivity.this, idAmigo);
 

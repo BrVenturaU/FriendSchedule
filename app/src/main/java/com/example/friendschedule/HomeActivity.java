@@ -28,6 +28,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         switch (view.getId()){
             case R.id.btnAgregar:{
                 intent = new Intent(HomeActivity.this, AgregarActivity.class);
+                intent.putExtra("idAmigo", 0);
                 startActivity(intent);
                 break;
             }

@@ -1,6 +1,8 @@
 package com.example.friendschedule.Adapters;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.friendschedule.AgregarActivity;
 import com.example.friendschedule.Entities.Amigo;
 import com.example.friendschedule.Interfaces.IAmigoService;
 import com.example.friendschedule.R;
@@ -35,12 +38,12 @@ public class AmigosAdapter extends RecyclerView.Adapter<AmigosAdapter.ViewHolder
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView tvNombreCompleto, tvTelefono;
-        ImageButton btnFavorito;
+        ImageButton btnEditar;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             tvNombreCompleto = itemView.findViewById(R.id.tvNombreCompleto);
             tvTelefono = itemView.findViewById(R.id.tvTelefono);
-            btnFavorito = itemView.findViewById(R.id.btnEditar);
+            btnEditar = itemView.findViewById(R.id.btnEditar);
         }
     }
 
@@ -78,5 +81,14 @@ public class AmigosAdapter extends RecyclerView.Adapter<AmigosAdapter.ViewHolder
     private void setAmigoData(final Amigo amigo, ViewHolder holder){
         holder.tvNombreCompleto.setText(amigo.getPrimerNombre() + " " + amigo.getPrimerApellido());
         holder.tvTelefono.setText(amigo.getTelefono());
+        holder.btnEditar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context.getApplicationContext(), AgregarActivity.class);
+                intent.putExtra("idAmigo", amigo.getId());
+                ((Activity)context).startActivity(intent);
+                ((Activity)context).finish();
+            }
+        });
     }
 }

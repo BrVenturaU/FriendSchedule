@@ -65,7 +65,7 @@ public class AmigosFragment extends Fragment implements View.OnClickListener{
                 public void onClick(View view) {
                     int idAmigo = amigos.get(recyclerView.getChildAdapterPosition(view)).getId();
                     Intent intent = new Intent(context, InformacionAmigoActivity.class);
-                    intent.putExtra("idAmigo", idAmigo);
+                    intent.putExtra("idAmigoInfo", idAmigo);
                     startActivity(intent);
                     ((Activity)context).finish();
                 }
