@@ -17,7 +17,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/agregar_titulo"
-            android:textSize="24dp"
+            android:textSize="36sp"
             android:textColor="@color/colorPrimaryDark"
             android:textStyle="bold"
             android:textAlignment="center"

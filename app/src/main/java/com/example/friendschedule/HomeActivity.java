@@ -29,13 +29,11 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.btnAgregar:{
                 intent = new Intent(HomeActivity.this, AgregarActivity.class);
                 startActivity(intent);
-                finish();
                 break;
             }
             case R.id.btnListado:{
                 intent = new Intent(HomeActivity.this, MainActivity.class);
                 startActivity(intent);
-                finish();
                 break;
             }
         }
