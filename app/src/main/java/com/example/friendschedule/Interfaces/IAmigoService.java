@@ -12,5 +12,6 @@ public interface IAmigoService {
     Amigo getById(Context context, Integer id);
     Amigo changeFavorite(Context context, Integer id, Integer favorito);
     long insert(Context context, Amigo amigo);
+    int update(Context context, Amigo amigo);
     Boolean delete(Context context, Integer id);
 }

@@ -14,6 +14,7 @@
         android:orientation="vertical"
         android:padding="16dp">
         <TextView
+            android:id="@+id/tvTitulo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/agregar_titulo"
@@ -95,13 +96,24 @@
             android:layout_height="wrap_content"
             android:gravity="center">
             <Button
+                android:id="@+id/btnActualizar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/colorPrimary"
+                android:text="@string/btActualizar"
+                android:textColor="@color/colorFondo"
+                android:layout_marginRight="16dp"
+                android:visibility="gone"
+                android:padding="8dp"/>
+            <Button
                 android:id="@+id/btnGuardar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@color/colorPrimary"
                 android:text="@string/btGuardar"
                 android:textColor="@color/colorFondo"
-                android:layout_marginRight="16dp"/>
+                android:layout_marginRight="16dp"
+                android:padding="8dp"/>
 
             <Button
                 android:id="@+id/btnCancelar"
@@ -110,6 +122,7 @@
                 android:background="@color/cancelButton"
                 android:text="@string/btCancelar"
                 android:textColor="@color/colorFondo"
+                android:padding="8dp"
                 />
         </LinearLayout>
 
